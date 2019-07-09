@@ -18,8 +18,8 @@ export class Page extends React.Component {
                     <button className="btn" onClick={this.onBtnClick}>2015</button>
                     <button className="btn" onClick={this.onBtnClick}>2014</button>
                 </div>
-                <h2>{year} year.</h2>
-                {isFetching ? <p>Downloading...</p> : <p>You have {photos.length} photos.</p>}
+                <h2>{year} year. {isFetching ? 'Downloading...' : `[${photos.length}]`}</h2>
+                
             </div>
         );
     }
