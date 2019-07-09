@@ -3,22 +3,23 @@ import PropTypes from 'prop-types';
 
 export class Page extends React.Component {
     onBtnClick = e => {
-        const year = +e.currentTarget.innerText;        
-        this.props.setYear(year);
+        const year = parseInt(e.currentTarget.innerText, 10);        
+        this.props.getPhotos(year);
     }
     render() {
-        const {year, photos} = this.props;
+        const {year, photos, isFetching} = this.props;
         return (
-            <div>
-                <div>
-                    <button onClick={this.onBtnClick}>2019</button>
-                    <button onClick={this.onBtnClick}>2018</button>
-                    <button onClick={this.onBtnClick}>2017</button>
-                    <button onClick={this.onBtnClick}>2016</button>
-                    <button onClick={this.onBtnClick}>2015</button>
-                    <button onClick={this.onBtnClick}>2014</button>
+            <div className="page">
+                <div className="btn-wrapper">
+                    <button className="btn" onClick={this.onBtnClick}>2019</button>
+                    <button className="btn" onClick={this.onBtnClick}>2017</button>
+                    <button className="btn" onClick={this.onBtnClick}>2018</button>
+                    <button className="btn" onClick={this.onBtnClick}>2016</button>
+                    <button className="btn" onClick={this.onBtnClick}>2015</button>
+                    <button className="btn" onClick={this.onBtnClick}>2014</button>
                 </div>
-                <p>You have {photos.length} photos in {year} year.</p>
+                <h2>{year} year.</h2>
+                {isFetching ? <p>Downloading...</p> : <p>You have {photos.length} photos.</p>}
             </div>
         );
     }
@@ -27,5 +28,6 @@ export class Page extends React.Component {
 Page.propTypes = {
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    setYear: PropTypes.func.isRequired,
+    getPhotos: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool.isRequired,
 }
